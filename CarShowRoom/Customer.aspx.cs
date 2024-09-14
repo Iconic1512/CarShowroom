@@ -125,6 +125,11 @@ namespace CarShowRoom
                 DeleteCustomer(customerId);
                 BindGrid();
             }
+            else if (e.CommandName == "UpdateCustomer")
+            {
+                int customerId = Convert.ToInt32(e.CommandArgument);
+                LoadCustomerData(customerId);
+            }
         }
 
         private void BindGrid()
@@ -174,6 +179,41 @@ namespace CarShowRoom
             catch (Exception ex)
             {
                 ShowModal("An error occurred while deleting the customer: " + ex.Message);
+            }
+        }
+
+        private void LoadCustomerData(int customerId)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["CarShowroomConnectionString"].ConnectionString;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT * FROM Customer WHERE CustomerId=@CustomerId";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@CustomerId", customerId);
+                        conn.Open();
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            txtCustomerId.Text = reader["CustomerId"].ToString();
+                            txtName.Text = reader["Name"].ToString();
+                            txtEmail.Text = reader["Email"].ToString();
+                            txtPhoneNo.Text = reader["PhoneNo"].ToString();
+                            txtAddress.Text = reader["Address"].ToString();
+                            txtDOB.Text = reader["DOB"].ToString();
+                            txtAadharCard.Text = reader["AadharCard"].ToString();
+                            txtGender.Text = reader["Gender"].ToString();
+                            txtPassword.Text = reader["Password"].ToString();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowModal("An error occurred while loading customer data: " + ex.Message);
             }
         }
 

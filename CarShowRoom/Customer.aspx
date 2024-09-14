@@ -27,6 +27,7 @@
         .modal-header { background-color: #007bff; color: #fff; }
         .modal-footer { justify-content: center; }
         .modal-body { text-align: center; font-size: 1.2em; }
+        .btn-container { display: flex; gap: 10px; justify-content: center; }
     </style>
 </head>
 <body>
@@ -79,7 +80,6 @@
 
                 <div class="form-actions">
                     <asp:Button ID="btnAddCustomer" runat="server" Text="Add Customer" OnClick="btnAddCustomer_Click" CssClass="btn btn-primary" />
-                    <asp:Button ID="btnUpdateCustomer" runat="server" Text="Update Customer" OnClick="btnUpdateCustomer_Click" CssClass="btn btn-secondary" />
                     <asp:Button ID="btnViewCustomers" runat="server" Text="View Customers" OnClick="btnViewCustomers_Click" CssClass="btn btn-info" />
                 </div>
             </asp:Panel>
@@ -99,7 +99,10 @@
                         <asp:BoundField DataField="Gender" HeaderText="Gender" />
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:Button ID="btnDelete" runat="server" CommandName="DeleteCustomer" CommandArgument='<%# Eval("CustomerId") %>' Text="Delete" CssClass="btn btn-danger btn-sm" />
+                                <div class="btn-container">
+                                    <asp:Button ID="btnUpdate" runat="server" CommandName="UpdateCustomer" CommandArgument='<%# Eval("CustomerId") %>' Text="Update" CssClass="btn btn-secondary btn-sm" />
+                                    <asp:Button ID="btnDelete" runat="server" CommandName="DeleteCustomer" CommandArgument='<%# Eval("CustomerId") %>' Text="Delete" CssClass="btn btn-danger btn-sm" />
+                                </div>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
@@ -135,9 +138,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        function showModal(message) {
-            var lblModalMessage = document.getElementById('<%= lblModalMessage.ClientID %>');
-            lblModalMessage.innerText = message;
+        function showModal() {
             $('#messageModal').modal('show');
         }
     </script>
