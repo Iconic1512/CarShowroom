@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CarShowroom
+namespace CarShowRoom
 {
 
 
@@ -22,6 +22,15 @@ namespace CarShowroom
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+
+        /// <summary>
+        /// pnlCustomerForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlCustomerForm;
 
         /// <summary>
         /// txtCustomerId control.
@@ -132,13 +141,22 @@ namespace CarShowroom
         protected global::System.Web.UI.WebControls.Button btnUpdateCustomer;
 
         /// <summary>
-        /// btnDeleteCustomer control.
+        /// btnViewCustomers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDeleteCustomer;
+        protected global::System.Web.UI.WebControls.Button btnViewCustomers;
+
+        /// <summary>
+        /// pnlCustomers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlCustomers;
 
         /// <summary>
         /// gvCustomers control.
@@ -148,5 +166,23 @@ namespace CarShowroom
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvCustomers;
+
+        /// <summary>
+        /// btnBackToManagement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBackToManagement;
+
+        /// <summary>
+        /// lblModalMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblModalMessage;
     }
 }

@@ -3,8 +3,9 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
-namespace CarShowroom
+namespace CarShowRoom
 {
     public partial class Customer : Page
     {
@@ -12,7 +13,8 @@ namespace CarShowroom
         {
             if (!IsPostBack)
             {
-                BindGrid();
+                pnlCustomers.Visible = false;
+                pnlCustomerForm.Visible = true;
             }
         }
 
@@ -27,109 +29,171 @@ namespace CarShowroom
                 string.IsNullOrEmpty(txtGender.Text) ||
                 string.IsNullOrEmpty(txtPassword.Text))
             {
-                lblMessage.Text = "All fields are required.";
+                ShowModal("All fields are required.");
                 return;
             }
 
             string connectionString = ConfigurationManager.ConnectionStrings["CarShowroomConnectionString"].ConnectionString;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                string query = "INSERT INTO Customer (Name, Email, PhoneNo, Address, DOB, AadharCard, Gender, Password) VALUES (@Name, @Email, @PhoneNo, @Address, @DOB, @AadharCard, @Gender, @Password)";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    cmd.Parameters.AddWithValue("@Name", txtName.Text);
-                    cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
-                    cmd.Parameters.AddWithValue("@PhoneNo", txtPhoneNo.Text);
-                    cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
-                    cmd.Parameters.AddWithValue("@DOB", txtDOB.Text);
-                    cmd.Parameters.AddWithValue("@AadharCard", txtAadharCard.Text);
-                    cmd.Parameters.AddWithValue("@Gender", txtGender.Text);
-                    cmd.Parameters.AddWithValue("@Password", txtPassword.Text);
+                    string query = "INSERT INTO Customer (Name, Email, PhoneNo, Address, DOB, AadharCard, Gender, Password) VALUES (@Name, @Email, @PhoneNo, @Address, @DOB, @AadharCard, @Gender, @Password)";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Name", txtName.Text);
+                        cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
+                        cmd.Parameters.AddWithValue("@PhoneNo", txtPhoneNo.Text);
+                        cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
+                        cmd.Parameters.AddWithValue("@DOB", txtDOB.Text);
+                        cmd.Parameters.AddWithValue("@AadharCard", txtAadharCard.Text);
+                        cmd.Parameters.AddWithValue("@Gender", txtGender.Text);
+                        cmd.Parameters.AddWithValue("@Password", txtPassword.Text);
 
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
                 }
+                ShowModal("Customer added successfully.");
+                ClearForm();
             }
-            BindGrid();
-            lblMessage.Text = "Customer added successfully.";
+            catch (Exception ex)
+            {
+                ShowModal("An error occurred while adding the customer: " + ex.Message);
+            }
         }
 
         protected void btnUpdateCustomer_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtCustomerId.Text))
             {
-                lblMessage.Text = "Customer ID is required for update.";
+                ShowModal("Customer ID is required for update.");
                 return;
             }
 
             string connectionString = ConfigurationManager.ConnectionStrings["CarShowroomConnectionString"].ConnectionString;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                string query = "UPDATE Customer SET Name=@Name, Email=@Email, PhoneNo=@PhoneNo, Address=@Address, DOB=@DOB, AadharCard=@AadharCard, Gender=@Gender, Password=@Password WHERE CustomerId=@CustomerId";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    cmd.Parameters.AddWithValue("@CustomerId", txtCustomerId.Text);
-                    cmd.Parameters.AddWithValue("@Name", txtName.Text);
-                    cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
-                    cmd.Parameters.AddWithValue("@PhoneNo", txtPhoneNo.Text);
-                    cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
-                    cmd.Parameters.AddWithValue("@DOB", txtDOB.Text);
-                    cmd.Parameters.AddWithValue("@AadharCard", txtAadharCard.Text);
-                    cmd.Parameters.AddWithValue("@Gender", txtGender.Text);
-                    cmd.Parameters.AddWithValue("@Password", txtPassword.Text);
+                    string query = "UPDATE Customer SET Name=@Name, Email=@Email, PhoneNo=@PhoneNo, Address=@Address, DOB=@DOB, AadharCard=@AadharCard, Gender=@Gender, Password=@Password WHERE CustomerId=@CustomerId";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@CustomerId", txtCustomerId.Text);
+                        cmd.Parameters.AddWithValue("@Name", txtName.Text);
+                        cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
+                        cmd.Parameters.AddWithValue("@PhoneNo", txtPhoneNo.Text);
+                        cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
+                        cmd.Parameters.AddWithValue("@DOB", txtDOB.Text);
+                        cmd.Parameters.AddWithValue("@AadharCard", txtAadharCard.Text);
+                        cmd.Parameters.AddWithValue("@Gender", txtGender.Text);
+                        cmd.Parameters.AddWithValue("@Password", txtPassword.Text);
 
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
                 }
+                ShowModal("Customer updated successfully.");
+                ClearForm();
             }
-            BindGrid();
-            lblMessage.Text = "Customer updated successfully.";
+            catch (Exception ex)
+            {
+                ShowModal("An error occurred while updating the customer: " + ex.Message);
+            }
         }
 
-        protected void btnDeleteCustomer_Click(object sender, EventArgs e)
+        protected void btnViewCustomers_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtCustomerId.Text))
-            {
-                lblMessage.Text = "Customer ID is required for deletion.";
-                return;
-            }
-
-            string connectionString = ConfigurationManager.ConnectionStrings["CarShowroomConnectionString"].ConnectionString;
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "DELETE FROM Customer WHERE CustomerId=@CustomerId";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@CustomerId", txtCustomerId.Text);
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
             BindGrid();
-            lblMessage.Text = "Customer deleted successfully.";
+            pnlCustomers.Visible = true;
+            pnlCustomerForm.Visible = false;
+        }
+
+        protected void btnBackToManagement_Click(object sender, EventArgs e)
+        {
+            pnlCustomers.Visible = false;
+            pnlCustomerForm.Visible = true;
+        }
+
+        protected void gvCustomers_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "DeleteCustomer")
+            {
+                int customerId = Convert.ToInt32(e.CommandArgument);
+                DeleteCustomer(customerId);
+                BindGrid();
+            }
         }
 
         private void BindGrid()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["CarShowroomConnectionString"].ConnectionString;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                string query = "SELECT * FROM Customer";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    conn.Open();
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    gvCustomers.DataSource = dt;
-                    gvCustomers.DataBind();
+                    string query = "SELECT * FROM Customer";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        conn.Open();
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        gvCustomers.DataSource = dt;
+                        gvCustomers.DataBind();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                ShowModal("An error occurred while loading customers: " + ex.Message);
+            }
+        }
+
+        private void DeleteCustomer(int customerId)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["CarShowroomConnectionString"].ConnectionString;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string query = "DELETE FROM Customer WHERE CustomerId=@CustomerId";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@CustomerId", customerId);
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                ShowModal("Customer deleted successfully.");
+            }
+            catch (Exception ex)
+            {
+                ShowModal("An error occurred while deleting the customer: " + ex.Message);
+            }
+        }
+
+        private void ClearForm()
+        {
+            txtCustomerId.Text = string.Empty;
+            txtName.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtPhoneNo.Text = string.Empty;
+            txtAddress.Text = string.Empty;
+            txtDOB.Text = string.Empty;
+            txtAadharCard.Text = string.Empty;
+            txtGender.Text = string.Empty;
+            txtPassword.Text = string.Empty;
+        }
+
+        private void ShowModal(string message)
+        {
+            lblModalMessage.Text = message;
+            ClientScript.RegisterStartupScript(this.GetType(), "showModal", "showModal();", true);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿// Login.aspx.cs
-using System;
+﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Web.UI;
@@ -20,8 +19,8 @@ namespace CarShowRoom
                 string query = "SELECT CustomerId, Name FROM Customer WHERE Email=@Email AND Password=@Password";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
-                    cmd.Parameters.AddWithValue("@Password", txtPassword.Text);
+                    cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
 
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -34,7 +33,10 @@ namespace CarShowRoom
                     }
                     else
                     {
-                        lblMessage.Text = "Invalid email or password.";
+                        // Show alert box if login fails
+                        string message = "Invalid email or password.";
+                        string script = $"showAlert('{message}');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "LoginAlert", script, true);
                     }
                 }
             }

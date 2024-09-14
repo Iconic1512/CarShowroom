@@ -96,15 +96,6 @@ namespace CarShowRoom
         protected global::System.Web.UI.WebControls.DropDownList ddlGender;
 
         /// <summary>
-        /// lblMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessage;
-
-        /// <summary>
         /// btnSignup control.
         /// </summary>
         /// <remarks>
@@ -112,5 +103,14 @@ namespace CarShowRoom
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSignup;
+
+        /// <summary>
+        /// lblModalMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblModalMessage;
     }
 }
