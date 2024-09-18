@@ -3,23 +3,35 @@
   "WorkspaceRootPath": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|C:\\Users\\iconi\\Desktop\\CarShowRoom\\carshowroom\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|solutionrelative:carshowroom\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|c:\\users\\iconi\\desktop\\carshowroom\\carshowroom\\car.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|solutionrelative:carshowroom\\car.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|c:\\users\\iconi\\desktop\\carshowroom\\carshowroom\\customer.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|solutionrelative:carshowroom\\customer.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|c:\\users\\iconi\\desktop\\carshowroom\\carshowroom\\car.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|solutionrelative:carshowroom\\car.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|c:\\users\\iconi\\desktop\\carshowroom\\carshowroom\\sales.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|solutionrelative:carshowroom\\sales.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|c:\\users\\iconi\\desktop\\carshowroom\\carshowroom\\employee.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|C:\\Users\\iconi\\Desktop\\CarShowRoom\\carshowroom\\employee.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|solutionrelative:carshowroom\\employee.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|c:\\users\\iconi\\desktop\\carshowroom\\carshowroom\\employee.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "AbsoluteMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|C:\\Users\\iconi\\Desktop\\CarShowRoom\\carshowroom\\employee.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|solutionrelative:carshowroom\\employee.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|c:\\users\\iconi\\desktop\\carshowroom\\carshowroom\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|solutionrelative:carshowroom\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|c:\\users\\iconi\\desktop\\carshowroom\\carshowroom\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "AbsoluteMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|C:\\Users\\iconi\\Desktop\\CarShowRoom\\carshowroom\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|solutionrelative:carshowroom\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
@@ -34,11 +46,51 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "Car.aspx",
+              "DocumentMoniker": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\CarShowRoom\\Car.aspx",
+              "RelativeDocumentMoniker": "CarShowRoom\\Car.aspx",
+              "ToolTip": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\CarShowRoom\\Car.aspx",
+              "RelativeToolTip": "CarShowRoom\\Car.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-09-18T09:58:21.515Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Customer.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\CarShowRoom\\Customer.aspx.cs",
+              "RelativeDocumentMoniker": "CarShowRoom\\Customer.aspx.cs",
+              "ToolTip": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\CarShowRoom\\Customer.aspx.cs",
+              "RelativeToolTip": "CarShowRoom\\Customer.aspx.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAQwCMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-18T10:23:50.72Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Car.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\CarShowRoom\\Car.aspx.cs",
+              "RelativeDocumentMoniker": "CarShowRoom\\Car.aspx.cs",
+              "ToolTip": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\CarShowRoom\\Car.aspx.cs",
+              "RelativeToolTip": "CarShowRoom\\Car.aspx.cs",
+              "ViewState": "AQIAAG8AAAAAAAAAAAAQwLYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-18T10:00:49.21Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Login.aspx",
               "DocumentMoniker": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\CarShowRoom\\Login.aspx",
               "RelativeDocumentMoniker": "CarShowRoom\\Login.aspx",
@@ -51,7 +103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "Employee.aspx.cs",
               "DocumentMoniker": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\CarShowRoom\\Employee.aspx.cs",
               "RelativeDocumentMoniker": "CarShowRoom\\Employee.aspx.cs",
@@ -64,7 +116,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Employee.aspx",
               "DocumentMoniker": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\CarShowRoom\\Employee.aspx",
               "RelativeDocumentMoniker": "CarShowRoom\\Employee.aspx",
@@ -77,7 +129,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "Home.aspx",
               "DocumentMoniker": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\CarShowRoom\\Home.aspx",
               "RelativeDocumentMoniker": "CarShowRoom\\Home.aspx",
@@ -90,7 +142,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Sales.aspx",
               "DocumentMoniker": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\CarShowRoom\\Sales.aspx",
               "RelativeDocumentMoniker": "CarShowRoom\\Sales.aspx",
@@ -103,7 +155,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "Sales.aspx.cs",
               "DocumentMoniker": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\CarShowRoom\\Sales.aspx.cs",
               "RelativeDocumentMoniker": "CarShowRoom\\Sales.aspx.cs",

@@ -1,4 +1,4 @@
-﻿﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Car.aspx.cs" Inherits="CarShowRoom.Car" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Car.aspx.cs" Inherits="CarShowRoom.Car" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -31,6 +31,9 @@
             display: flex;
             gap: 10px; /* Adjust space between buttons */
         }
+        .alert {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -40,8 +43,8 @@
                 <h2 class="text-center">Car Management</h2>
             </div>
             <div class="card-body">
-                <asp:Label ID="lblMessage" runat="server" ForeColor="Red" CssClass="alert alert-danger d-none" />
-                <div id="alertBox" class="alert-box"></div>
+                <asp:Label ID="lblMessage" runat="server" CssClass="alert" />
+                <div id="alertBox" class="alert alert-danger" role="alert"></div>
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label for="ddlManufacturer">Manufacturer:</label>
@@ -82,9 +85,11 @@
                 </div>
                 <div class="button-group text-center">
                     <asp:Button ID="btnAddCar" runat="server" Text="Add Car" OnClick="btnAddCar_Click" CssClass="btn btn-primary mx-2" />
+                    <asp:Button ID="btnUpdateCar" runat="server" Text="Update Car" OnClick="btnUpdateCar_Click" CssClass="btn btn-warning mx-2" Visible="false" />
+                    <asp:Button ID="btnDeleteCar" runat="server" Text="Delete Car" OnClick="btnDeleteCar_Click" CssClass="btn btn-danger mx-2" Visible="false" />
                     <asp:Button ID="btnViewCars" runat="server" Text="View Cars" CssClass="btn btn-info mx-2" OnClick="btnViewCars_Click" />
                 </div>
-                <asp:GridView ID="gvCars" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered table-striped gridview mt-4" OnRowCommand="gvCars_RowCommand" DataKeyNames="CarId" Visible="false">
+                <asp:GridView ID="gvCars" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered table-striped gridview mt-4" OnRowCommand="gvCars_RowCommand" OnRowDeleting="gvCars_RowDeleting" DataKeyNames="CarId" Visible="false">
                     <Columns>
                         <asp:BoundField DataField="CarId" HeaderText="Car ID" ReadOnly="True" />
                         <asp:BoundField DataField="ManufacturerName" HeaderText="Manufacturer" />
@@ -111,6 +116,13 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                <% if (!string.IsNullOrEmpty(lblMessage.Text)) { %>
+                    $('#alertBox').text('<%= lblMessage.Text %>').show();
+                <% } %>
+            });
+        </script>
     </form>
 </body>
 </html>
