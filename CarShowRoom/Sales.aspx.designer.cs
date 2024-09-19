@@ -96,22 +96,13 @@ namespace CarShowRoom
         protected global::System.Web.UI.WebControls.Button btnAddSale;
 
         /// <summary>
-        /// btnUpdateSale control.
+        /// btnViewSales control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpdateSale;
-
-        /// <summary>
-        /// btnDeleteSale control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDeleteSale;
+        protected global::System.Web.UI.WebControls.Button btnViewSales;
 
         /// <summary>
         /// gvSales control.

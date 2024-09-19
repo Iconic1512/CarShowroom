@@ -35,63 +35,15 @@ namespace CarShowRoom
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
+                    conn.Close();
                 }
+                BindGrid();
             }
-            BindGrid();
         }
 
-        protected void btnUpdateSale_Click(object sender, EventArgs e)
+        protected void btnViewSales_Click(object sender, EventArgs e)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["CarShowroomConnectionString"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "UPDATE Sales SET CustomerId=@CustomerId, CarId=@CarId, EmployeeId=@EmployeeId, SaleDate=@SaleDate, SalePrice=@SalePrice, PaymentMethod=@PaymentMethod, Status=@Status WHERE SaleId=@SaleId";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@SaleId", ViewState["SaleId"]);
-                    cmd.Parameters.AddWithValue("@CustomerId", txtCustomerId.Text);
-                    cmd.Parameters.AddWithValue("@CarId", txtCarId.Text);
-                    cmd.Parameters.AddWithValue("@EmployeeId", txtEmployeeId.Text);
-                    cmd.Parameters.AddWithValue("@SaleDate", txtSaleDate.Text);
-                    cmd.Parameters.AddWithValue("@SalePrice", txtSalePrice.Text);
-                    cmd.Parameters.AddWithValue("@PaymentMethod", txtPaymentMethod.Text);
-                    cmd.Parameters.AddWithValue("@Status", txtStatus.Text);
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
             BindGrid();
-        }
-
-        protected void btnDeleteSale_Click(object sender, EventArgs e)
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["CarShowroomConnectionString"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "DELETE FROM Sales WHERE SaleId=@SaleId";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@SaleId", ViewState["SaleId"]);
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            BindGrid();
-        }
-
-        protected void gvSales_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            GridViewRow row = gvSales.SelectedRow;
-            ViewState["SaleId"] = row.Cells[1].Text;
-            txtCustomerId.Text = row.Cells[2].Text;
-            txtCarId.Text = row.Cells[3].Text;
-            txtEmployeeId.Text = row.Cells[4].Text;
-            txtSaleDate.Text = row.Cells[5].Text;
-            txtSalePrice.Text = row.Cells[6].Text;
-            txtPaymentMethod.Text = row.Cells[7].Text;
-            txtStatus.Text = row.Cells[8].Text;
         }
 
         private void BindGrid()
@@ -109,6 +61,75 @@ namespace CarShowRoom
                     gvSales.DataSource = dt;
                     gvSales.DataBind();
                 }
+            }
+        }
+
+        protected void gvSales_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvSales.EditIndex = e.NewEditIndex;
+            BindGrid();
+        }
+
+        protected void gvSales_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvSales.EditIndex = -1;
+            BindGrid();
+        }
+
+        protected void gvSales_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            GridViewRow row = gvSales.Rows[e.RowIndex];
+            Label lblSaleId = (Label)row.FindControl("lblSaleId");
+            TextBox txtCustomerIdGrid = (TextBox)row.FindControl("txtCustomerIdGrid");
+            TextBox txtCarIdGrid = (TextBox)row.FindControl("txtCarIdGrid");
+            TextBox txtEmployeeIdGrid = (TextBox)row.FindControl("txtEmployeeIdGrid");
+            TextBox txtSaleDateGrid = (TextBox)row.FindControl("txtSaleDateGrid");
+            TextBox txtSalePriceGrid = (TextBox)row.FindControl("txtSalePriceGrid");
+            TextBox txtPaymentMethodGrid = (TextBox)row.FindControl("txtPaymentMethodGrid");
+            TextBox txtStatusGrid = (TextBox)row.FindControl("txtStatusGrid");
+
+            string connectionString = ConfigurationManager.ConnectionStrings["CarShowroomConnectionString"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "UPDATE Sales SET CustomerId = @CustomerId, CarId = @CarId, EmployeeId = @EmployeeId, SaleDate = @SaleDate, SalePrice = @SalePrice, PaymentMethod = @PaymentMethod, Status = @Status WHERE SaleId = @SaleId";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@SaleId", lblSaleId.Text);
+                    cmd.Parameters.AddWithValue("@CustomerId", txtCustomerIdGrid.Text);
+                    cmd.Parameters.AddWithValue("@CarId", txtCarIdGrid.Text);
+                    cmd.Parameters.AddWithValue("@EmployeeId", txtEmployeeIdGrid.Text);
+                    cmd.Parameters.AddWithValue("@SaleDate", txtSaleDateGrid.Text);
+                    cmd.Parameters.AddWithValue("@SalePrice", txtSalePriceGrid.Text);
+                    cmd.Parameters.AddWithValue("@PaymentMethod", txtPaymentMethodGrid.Text);
+                    cmd.Parameters.AddWithValue("@Status", txtStatusGrid.Text);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+                gvSales.EditIndex = -1;
+                BindGrid();
+            }
+        }
+
+        protected void gvSales_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            GridViewRow row = gvSales.Rows[e.RowIndex];
+            Label lblSaleId = (Label)row.FindControl("lblSaleId");
+
+            string connectionString = ConfigurationManager.ConnectionStrings["CarShowroomConnectionString"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "DELETE FROM Sales WHERE SaleId = @SaleId";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@SaleId", lblSaleId.Text);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+                BindGrid();
             }
         }
     }

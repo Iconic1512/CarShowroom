@@ -58,23 +58,84 @@
             </div>
             <div class="btn-group">
                 <asp:Button ID="btnAddSale" runat="server" Text="Add Sale" CssClass="btn btn-primary" OnClick="btnAddSale_Click" />
-                <asp:Button ID="btnUpdateSale" runat="server" Text="Update Sale" CssClass="btn btn-secondary" OnClick="btnUpdateSale_Click" />
-                <asp:Button ID="btnDeleteSale" runat="server" Text="Delete Sale" CssClass="btn btn-danger" OnClick="btnDeleteSale_Click" />
+                <asp:Button ID="btnViewSales" runat="server" Text="View Sales" CssClass="btn btn-info" OnClick="btnViewSales_Click" />
             </div>
-            <asp:GridView ID="gvSales" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered grid" OnSelectedIndexChanged="gvSales_SelectedIndexChanged">
+            <asp:GridView ID="gvSales" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered grid"
+                OnRowEditing="gvSales_RowEditing"
+                OnRowCancelingEdit="gvSales_RowCancelingEdit"
+                OnRowUpdating="gvSales_RowUpdating"
+                OnRowDeleting="gvSales_RowDeleting">
                 <Columns>
-                    <asp:BoundField DataField="SaleId" HeaderText="SaleId" />
-                    <asp:BoundField DataField="CustomerId" HeaderText="CustomerId" />
-                    <asp:BoundField DataField="CarId" HeaderText="CarId" />
-                    <asp:BoundField DataField="EmployeeId" HeaderText="EmployeeId" />
-                    <asp:BoundField DataField="SaleDate" HeaderText="Sale Date" />
-                    <asp:BoundField DataField="SalePrice" HeaderText="Sale Price" />
-                    <asp:BoundField DataField="PaymentMethod" HeaderText="Payment Method" />
-                    <asp:BoundField DataField="Status" HeaderText="Status" />
+                    <asp:TemplateField HeaderText="SaleId">
+                        <ItemTemplate>
+                            <asp:Label ID="lblSaleId" runat="server" Text='<%# Eval("SaleId") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="CustomerId">
+                        <ItemTemplate>
+                            <asp:Label ID="lblCustomerId" runat="server" Text='<%# Eval("CustomerId") %>' />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtCustomerIdGrid" runat="server" Text='<%# Bind("CustomerId") %>' CssClass="form-control" />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="CarId">
+                        <ItemTemplate>
+                            <asp:Label ID="lblCarId" runat="server" Text='<%# Eval("CarId") %>' />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtCarIdGrid" runat="server" Text='<%# Bind("CarId") %>' CssClass="form-control" />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="EmployeeId">
+                        <ItemTemplate>
+                            <asp:Label ID="lblEmployeeId" runat="server" Text='<%# Eval("EmployeeId") %>' />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtEmployeeIdGrid" runat="server" Text='<%# Bind("EmployeeId") %>' CssClass="form-control" />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="SaleDate">
+                        <ItemTemplate>
+                            <asp:Label ID="lblSaleDate" runat="server" Text='<%# Eval("SaleDate") %>' />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtSaleDateGrid" runat="server" Text='<%# Bind("SaleDate") %>' CssClass="form-control" TextMode="Date" />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="SalePrice">
+                        <ItemTemplate>
+                            <asp:Label ID="lblSalePrice" runat="server" Text='<%# Eval("SalePrice") %>' />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtSalePriceGrid" runat="server" Text='<%# Bind("SalePrice") %>' CssClass="form-control" />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="PaymentMethod">
+                        <ItemTemplate>
+                            <asp:Label ID="lblPaymentMethod" runat="server" Text='<%# Eval("PaymentMethod") %>' />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtPaymentMethodGrid" runat="server" Text='<%# Bind("PaymentMethod") %>' CssClass="form-control" />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Status">
+                        <ItemTemplate>
+                            <asp:Label ID="lblStatus" runat="server" Text='<%# Eval("Status") %>' />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtStatusGrid" runat="server" Text='<%# Bind("Status") %>' CssClass="form-control" />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:Button ID="btnSelect" runat="server" Text="Select" CommandName="Select" CssClass="btn btn-info btn-sm" />
+                            <asp:Button ID="btnEdit" runat="server" Text="Edit" CommandName="Edit" CssClass="btn btn-info btn-sm" />
+                            <asp:Button ID="btnDelete" runat="server" Text="Delete" CommandName="Delete" CssClass="btn btn-danger btn-sm" />
                         </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:Button ID="btnUpdate" runat="server" Text="Update" CommandName="Update" CssClass="btn btn-secondary btn-sm" />
+                            <asp:Button ID="btnCancel" runat="server" Text="Cancel" CommandName="Cancel" CssClass="btn btn-secondary btn-sm" />
+                        </EditItemTemplate>
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
