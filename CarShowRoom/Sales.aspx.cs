@@ -22,13 +22,16 @@ namespace CarShowRoom
             string connectionString = ConfigurationManager.ConnectionStrings["CarShowroomConnectionString"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "INSERT INTO Sales (CustomerId, CarId, SaleDate, SaleAmount) VALUES (@CustomerId, @CarId, @SaleDate, @SaleAmount)";
+                string query = "INSERT INTO Sales (CustomerId, CarId, EmployeeId, SaleDate, SalePrice, PaymentMethod, Status) VALUES (@CustomerId, @CarId, @EmployeeId, @SaleDate, @SalePrice, @PaymentMethod, @Status)";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@CustomerId", txtCustomerId.Text);
                     cmd.Parameters.AddWithValue("@CarId", txtCarId.Text);
+                    cmd.Parameters.AddWithValue("@EmployeeId", txtEmployeeId.Text);
                     cmd.Parameters.AddWithValue("@SaleDate", txtSaleDate.Text);
-                    cmd.Parameters.AddWithValue("@SaleAmount", txtSaleAmount.Text);
+                    cmd.Parameters.AddWithValue("@SalePrice", txtSalePrice.Text);
+                    cmd.Parameters.AddWithValue("@PaymentMethod", txtPaymentMethod.Text);
+                    cmd.Parameters.AddWithValue("@Status", txtStatus.Text);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -42,14 +45,17 @@ namespace CarShowRoom
             string connectionString = ConfigurationManager.ConnectionStrings["CarShowroomConnectionString"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "UPDATE Sales SET CustomerId=@CustomerId, CarId=@CarId, SaleDate=@SaleDate, SaleAmount=@SaleAmount WHERE SaleId=@SaleId";
+                string query = "UPDATE Sales SET CustomerId=@CustomerId, CarId=@CarId, EmployeeId=@EmployeeId, SaleDate=@SaleDate, SalePrice=@SalePrice, PaymentMethod=@PaymentMethod, Status=@Status WHERE SaleId=@SaleId";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@SaleId", ViewState["SaleId"]);
                     cmd.Parameters.AddWithValue("@CustomerId", txtCustomerId.Text);
                     cmd.Parameters.AddWithValue("@CarId", txtCarId.Text);
+                    cmd.Parameters.AddWithValue("@EmployeeId", txtEmployeeId.Text);
                     cmd.Parameters.AddWithValue("@SaleDate", txtSaleDate.Text);
-                    cmd.Parameters.AddWithValue("@SaleAmount", txtSaleAmount.Text);
+                    cmd.Parameters.AddWithValue("@SalePrice", txtSalePrice.Text);
+                    cmd.Parameters.AddWithValue("@PaymentMethod", txtPaymentMethod.Text);
+                    cmd.Parameters.AddWithValue("@Status", txtStatus.Text);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -81,8 +87,11 @@ namespace CarShowRoom
             ViewState["SaleId"] = row.Cells[1].Text;
             txtCustomerId.Text = row.Cells[2].Text;
             txtCarId.Text = row.Cells[3].Text;
-            txtSaleDate.Text = row.Cells[4].Text;
-            txtSaleAmount.Text = row.Cells[5].Text;
+            txtEmployeeId.Text = row.Cells[4].Text;
+            txtSaleDate.Text = row.Cells[5].Text;
+            txtSalePrice.Text = row.Cells[6].Text;
+            txtPaymentMethod.Text = row.Cells[7].Text;
+            txtStatus.Text = row.Cells[8].Text;
         }
 
         private void BindGrid()

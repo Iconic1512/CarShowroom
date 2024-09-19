@@ -37,12 +37,24 @@
                 <asp:TextBox ID="txtCarId" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
             <div class="form-group">
-                <label for="txtSaleDate">Sale Date:</label>
-                <asp:TextBox ID="txtSaleDate" runat="server" CssClass="form-control"></asp:TextBox>
+                <label for="txtEmployeeId">Employee Id:</label>
+                <asp:TextBox ID="txtEmployeeId" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
             <div class="form-group">
-                <label for="txtSaleAmount">Sale Amount:</label>
-                <asp:TextBox ID="txtSaleAmount" runat="server" CssClass="form-control"></asp:TextBox>
+                <label for="txtSaleDate">Sale Date:</label>
+                <asp:TextBox ID="txtSaleDate" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+            </div>
+            <div class="form-group">
+                <label for="txtSalePrice">Sale Price:</label>
+                <asp:TextBox ID="txtSalePrice" runat="server" CssClass="form-control"></asp:TextBox>
+            </div>
+            <div class="form-group">
+                <label for="txtPaymentMethod">Payment Method:</label>
+                <asp:TextBox ID="txtPaymentMethod" runat="server" CssClass="form-control"></asp:TextBox>
+            </div>
+            <div class="form-group">
+                <label for="txtStatus">Status:</label>
+                <asp:TextBox ID="txtStatus" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
             <div class="btn-group">
                 <asp:Button ID="btnAddSale" runat="server" Text="Add Sale" CssClass="btn btn-primary" OnClick="btnAddSale_Click" />
@@ -54,8 +66,16 @@
                     <asp:BoundField DataField="SaleId" HeaderText="SaleId" />
                     <asp:BoundField DataField="CustomerId" HeaderText="CustomerId" />
                     <asp:BoundField DataField="CarId" HeaderText="CarId" />
+                    <asp:BoundField DataField="EmployeeId" HeaderText="EmployeeId" />
                     <asp:BoundField DataField="SaleDate" HeaderText="Sale Date" />
-                    <asp:BoundField DataField="SaleAmount" HeaderText="Sale Amount" />
+                    <asp:BoundField DataField="SalePrice" HeaderText="Sale Price" />
+                    <asp:BoundField DataField="PaymentMethod" HeaderText="Payment Method" />
+                    <asp:BoundField DataField="Status" HeaderText="Status" />
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:Button ID="btnSelect" runat="server" Text="Select" CommandName="Select" CssClass="btn btn-info btn-sm" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
             </asp:GridView>
         </div>

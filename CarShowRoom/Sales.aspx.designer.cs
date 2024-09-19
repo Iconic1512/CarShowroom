@@ -42,6 +42,15 @@ namespace CarShowRoom
         protected global::System.Web.UI.WebControls.TextBox txtCarId;
 
         /// <summary>
+        /// txtEmployeeId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEmployeeId;
+
+        /// <summary>
         /// txtSaleDate control.
         /// </summary>
         /// <remarks>
@@ -51,13 +60,31 @@ namespace CarShowRoom
         protected global::System.Web.UI.WebControls.TextBox txtSaleDate;
 
         /// <summary>
-        /// txtSaleAmount control.
+        /// txtSalePrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSaleAmount;
+        protected global::System.Web.UI.WebControls.TextBox txtSalePrice;
+
+        /// <summary>
+        /// txtPaymentMethod control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPaymentMethod;
+
+        /// <summary>
+        /// txtStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtStatus;
 
         /// <summary>
         /// btnAddSale control.
