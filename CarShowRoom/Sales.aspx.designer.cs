@@ -78,15 +78,6 @@ namespace CarShowRoom
         protected global::System.Web.UI.WebControls.TextBox txtPaymentMethod;
 
         /// <summary>
-        /// txtStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStatus;
-
-        /// <summary>
         /// btnAddSale control.
         /// </summary>
         /// <remarks>
@@ -112,5 +103,14 @@ namespace CarShowRoom
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvSales;
+
+        /// <summary>
+        /// lblModalMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblModalMessage;
     }
 }

@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
 namespace CarShowRoom
 {
@@ -16,93 +17,70 @@ namespace CarShowRoom
             if (!IsPostBack)
             {
                 BindManufacturerDropdown();
-                lblMessage.Visible = false; // Hide message label on initial load
+                // Optionally, you could load cars here if needed, but it’s handled by the View Cars button
             }
         }
 
         protected void btnAddCar_Click(object sender, EventArgs e)
         {
-            if (IsValidForm())
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
-                using (SqlConnection con = new SqlConnection(connectionString))
-                {
-                    SqlCommand cmd = new SqlCommand("INSERT INTO CAR (ManufacturerId, Model, Year, Colour, Price, Mileage, EngineType, Transmission, Description) VALUES (@ManufacturerId, @Model, @Year, @Colour, @Price, @Mileage, @EngineType, @Transmission, @Description)", con);
-                    cmd.Parameters.AddWithValue("@ManufacturerId", ddlManufacturer.SelectedValue);
-                    cmd.Parameters.AddWithValue("@Model", txtModel.Text);
-                    cmd.Parameters.AddWithValue("@Year", int.Parse(txtYear.Text));
-                    cmd.Parameters.AddWithValue("@Colour", txtColour.Text);
-                    cmd.Parameters.AddWithValue("@Price", decimal.Parse(txtPrice.Text));
-                    cmd.Parameters.AddWithValue("@Mileage", decimal.Parse(txtMileage.Text));
-                    cmd.Parameters.AddWithValue("@EngineType", txtEngineType.Text);
-                    cmd.Parameters.AddWithValue("@Transmission", txtTransmission.Text);
-                    cmd.Parameters.AddWithValue("@Description", txtDescription.Text);
+                SqlCommand cmd = new SqlCommand("INSERT INTO CAR (ManufacturerId, Model, Year, Colour, Name, Price, Mileage, EngineType, Transmission, Description) OUTPUT INSERTED.CarId VALUES (@ManufacturerId, @Model, @Year, @Colour, @Name, @Price, @Mileage, @EngineType, @Transmission, @Description)", con);
 
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                }
+                cmd.Parameters.AddWithValue("@ManufacturerId", ddlManufacturer.SelectedValue);
+                cmd.Parameters.AddWithValue("@Model", txtModel.Text);
+                cmd.Parameters.AddWithValue("@Year", int.Parse(txtYear.Text));
+                cmd.Parameters.AddWithValue("@Colour", txtColour.Text);
+                cmd.Parameters.AddWithValue("@Name", txtName.Text);
+                cmd.Parameters.AddWithValue("@Price", decimal.Parse(txtPrice.Text));
+                cmd.Parameters.AddWithValue("@Mileage", decimal.Parse(txtMileage.Text));
+                cmd.Parameters.AddWithValue("@EngineType", txtEngineType.Text);
+                cmd.Parameters.AddWithValue("@Transmission", txtTransmission.Text);
+                cmd.Parameters.AddWithValue("@Description", txtDescription.Text);
 
-                ClearForm();
-                BindGrid();
-                ShowMessage("Car added successfully.", "alert-success");
+                con.Open();
+
+                // Execute the insert and retrieve the generated CarId
+                int carId = (int)cmd.ExecuteScalar(); // Get the inserted CarId
+
+                // Insert the record into the Inventory table
+                SqlCommand cmdInventory = new SqlCommand("INSERT INTO Inventory (CarId) VALUES (@CarId)", con);
+                cmdInventory.Parameters.AddWithValue("@CarId", carId);
+
+                cmdInventory.ExecuteNonQuery(); // Insert into Inventory with default values
+
+                con.Close();
+
+
             }
-            else
-            {
-                ShowMessage("Please fill in all fields.", "alert-danger");
-            }
+
+            ClearForm();
+            BindGrid();
         }
 
         protected void btnUpdateCar_Click(object sender, EventArgs e)
         {
             if (ViewState["CarId"] == null)
             {
-                ShowMessage("Select a car to update.", "alert-danger");
-                return;
-            }
-
-            if (IsValidForm())
-            {
-                using (SqlConnection con = new SqlConnection(connectionString))
-                {
-                    SqlCommand cmd = new SqlCommand("UPDATE CAR SET ManufacturerId=@ManufacturerId, Model=@Model, Year=@Year, Colour=@Colour, Price=@Price, Mileage=@Mileage, EngineType=@EngineType, Transmission=@Transmission, Description=@Description WHERE CarId=@CarId", con);
-                    cmd.Parameters.AddWithValue("@CarId", ViewState["CarId"]);
-                    cmd.Parameters.AddWithValue("@ManufacturerId", ddlManufacturer.SelectedValue);
-                    cmd.Parameters.AddWithValue("@Model", txtModel.Text);
-                    cmd.Parameters.AddWithValue("@Year", int.Parse(txtYear.Text));
-                    cmd.Parameters.AddWithValue("@Colour", txtColour.Text);
-                    cmd.Parameters.AddWithValue("@Price", decimal.Parse(txtPrice.Text));
-                    cmd.Parameters.AddWithValue("@Mileage", decimal.Parse(txtMileage.Text));
-                    cmd.Parameters.AddWithValue("@EngineType", txtEngineType.Text);
-                    cmd.Parameters.AddWithValue("@Transmission", txtTransmission.Text);
-                    cmd.Parameters.AddWithValue("@Description", txtDescription.Text);
-
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                }
-
-                ClearForm();
-                BindGrid();
-                ShowMessage("Car updated successfully.", "alert-success");
-            }
-            else
-            {
-                ShowMessage("Please fill in all fields.", "alert-danger");
-            }
-        }
-
-        protected void btnDeleteCar_Click(object sender, EventArgs e)
-        {
-            if (ViewState["CarId"] == null)
-            {
-                ShowMessage("Select a car to delete.", "alert-danger");
+                lblMessage.Text = "Select a car to update.";
+                lblMessage.CssClass = "alert alert-danger";
                 return;
             }
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("DELETE FROM CAR WHERE CarId=@CarId", con);
+                SqlCommand cmd = new SqlCommand("UPDATE CAR SET ManufacturerId=@ManufacturerId, Model=@Model, Year=@Year, Colour=@Colour,Name=@Name, Price=@Price, Mileage=@Mileage, EngineType=@EngineType, Transmission=@Transmission, Description=@Description WHERE CarId=@CarId", con);
                 cmd.Parameters.AddWithValue("@CarId", ViewState["CarId"]);
+                cmd.Parameters.AddWithValue("@ManufacturerId", ddlManufacturer.SelectedValue);
+                cmd.Parameters.AddWithValue("@Model", txtModel.Text);
+                cmd.Parameters.AddWithValue("@Year", int.Parse(txtYear.Text));
+                cmd.Parameters.AddWithValue("@Colour", txtColour.Text);
+                cmd.Parameters.AddWithValue("@Name", txtName.Text);
+                cmd.Parameters.AddWithValue("@Price", decimal.Parse(txtPrice.Text));
+                cmd.Parameters.AddWithValue("@Mileage", decimal.Parse(txtMileage.Text));
+                cmd.Parameters.AddWithValue("@EngineType", txtEngineType.Text);
+                cmd.Parameters.AddWithValue("@Transmission", txtTransmission.Text);
+                cmd.Parameters.AddWithValue("@Description", txtDescription.Text);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -111,7 +89,39 @@ namespace CarShowRoom
 
             ClearForm();
             BindGrid();
-            ShowMessage("Car deleted successfully.", "alert-success");
+        }
+
+        protected void btnDeleteCar_Click(object sender, EventArgs e)
+        {
+            if (ViewState["CarId"] == null)
+            {
+                lblMessage.Text = "Select a car to delete.";
+                lblMessage.CssClass = "alert alert-danger";
+                return;
+            }
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                // Delete from Inventory table using CarId
+                SqlCommand deleteInventoryCmd = new SqlCommand("DELETE FROM Inventory WHERE CarId = @CarId", con);
+                deleteInventoryCmd.Parameters.AddWithValue("@CarId", ViewState["CarId"]);
+
+                // Open connection and execute delete command for Inventory
+                con.Open();
+                deleteInventoryCmd.ExecuteNonQuery();
+
+                // Then delete from CAR table
+                SqlCommand deleteCarCmd = new SqlCommand("DELETE FROM CAR WHERE CarId=@CarId", con);
+                deleteCarCmd.Parameters.AddWithValue("@CarId", ViewState["CarId"]);
+
+                // Execute delete command for CAR
+                deleteCarCmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+
+            ClearForm();
+            BindGrid();
         }
 
         protected void btnViewCars_Click(object sender, EventArgs e)
@@ -129,89 +139,63 @@ namespace CarShowRoom
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 GridViewRow selectedRow = gvCars.Rows[index];
+                ViewState["CarId"] = gvCars.DataKeys[index].Value;
 
-                if (selectedRow != null)
-                {
-                    ViewState["CarId"] = gvCars.DataKeys[index].Value;
-
-                    // Fetch the ManufacturerId based on the CarId
-                    using (SqlConnection con = new SqlConnection(connectionString))
-                    {
-                        SqlCommand cmd = new SqlCommand("SELECT ManufacturerId FROM CAR WHERE CarId=@CarId", con);
-                        cmd.Parameters.AddWithValue("@CarId", ViewState["CarId"]);
-                        con.Open();
-                        var manufacturerId = cmd.ExecuteScalar();
-                        ddlManufacturer.SelectedValue = manufacturerId.ToString();
-                        con.Close();
-                    }
-
-                    txtModel.Text = selectedRow.Cells[2].Text;
-                    txtYear.Text = selectedRow.Cells[3].Text;
-                    txtColour.Text = selectedRow.Cells[4].Text;
-                    txtPrice.Text = selectedRow.Cells[5].Text;
-                    txtMileage.Text = selectedRow.Cells[6].Text;
-                    txtEngineType.Text = selectedRow.Cells[7].Text;
-                    txtTransmission.Text = selectedRow.Cells[8].Text;
-                    txtDescription.Text = selectedRow.Cells[9].Text;
-
-                    // Rebind the grid to refresh the data
-                    BindGrid();
-                }
+                ddlManufacturer.SelectedValue = gvCars.DataKeys[index].Values["ManufacturerId"].ToString();
+                txtModel.Text = selectedRow.Cells[2].Text;
+                txtYear.Text = selectedRow.Cells[3].Text;
+                txtName.Text = selectedRow.Cells[4].Text;
+                txtColour.Text = selectedRow.Cells[5].Text;
+                txtPrice.Text = selectedRow.Cells[6].Text;
+                txtMileage.Text = selectedRow.Cells[7].Text;
+                txtEngineType.Text = selectedRow.Cells[8].Text;
+                txtTransmission.Text = selectedRow.Cells[9].Text;
+                txtDescription.Text = selectedRow.Cells[10].Text;
             }
             else if (e.CommandName == "Delete")
             {
                 int carId = Convert.ToInt32(e.CommandArgument);
+
+                // Log carId for debugging purposes
+                Console.WriteLine("CarId to delete: " + carId);
+
                 using (SqlConnection con = new SqlConnection(connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("DELETE FROM CAR WHERE CarId=@CarId", con);
-                    cmd.Parameters.AddWithValue("@CarId", carId);
+                    SqlCommand deleteInventoryCmd = new SqlCommand("DELETE FROM Inventory WHERE CarId = @CarId", con);
+                    deleteInventoryCmd.Parameters.AddWithValue("@CarId", carId);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    deleteInventoryCmd.ExecuteNonQuery();
+
+                    SqlCommand deleteCarCmd = new SqlCommand("DELETE FROM CAR WHERE CarId=@CarId", con);
+                    deleteCarCmd.Parameters.AddWithValue("@CarId", carId);
+
+                    deleteCarCmd.ExecuteNonQuery();
                     con.Close();
                 }
 
-                BindGrid();
-                ShowMessage("Car deleted successfully.", "alert-success");
             }
+            BindGrid();
+
+
         }
 
         protected void gvCars_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            int carId = Convert.ToInt32(gvCars.DataKeys[e.RowIndex].Value);
-            string query = "DELETE FROM CAR WHERE CarId = @CarId";
-
-            string constr = ConfigurationManager.ConnectionStrings["CarShowroomConnectionString"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@CarId", carId);
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                }
-            }
-            lblMessage.Text = "Car deleted successfully.";
-            lblMessage.CssClass = "alert alert-success";
-            BindGrid(); // Rebind the GridView to refresh the data
+            // Do nothing because deletion is handled in RowCommand
         }
+
 
         private void BindGrid()
         {
-            string query = "SELECT CarId, (SELECT Name FROM MANUFACTURER WHERE MANUFACTURER.ManufacturerId = CAR.ManufacturerId) AS ManufacturerName, Model, Year, Colour, Price, Mileage, EngineType, Transmission, Description FROM CAR";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
-                    {
-                        DataTable dt = new DataTable();
-                        sda.Fill(dt);
-                        gvCars.DataSource = dt;
-                        gvCars.DataBind();
-                    }
-                }
+                SqlCommand cmd = new SqlCommand("SELECT CarId, (SELECT Name FROM MANUFACTURER WHERE MANUFACTURER.ManufacturerId = CAR.ManufacturerId) AS ManufacturerName, Model, Year, Name,Colour, Price, Mileage, EngineType, Transmission, Description FROM CAR", con);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                gvCars.DataSource = dt;
+                gvCars.DataBind();
             }
         }
 
@@ -236,32 +220,13 @@ namespace CarShowRoom
             txtModel.Text = "";
             txtYear.Text = "";
             txtColour.Text = "";
+            txtName.Text = "";
             txtPrice.Text = "";
             txtMileage.Text = "";
             txtEngineType.Text = "";
             txtTransmission.Text = "";
             txtDescription.Text = "";
             ViewState["CarId"] = null;
-        }
-
-        private bool IsValidForm()
-        {
-            return ddlManufacturer.SelectedIndex != -1 &&
-                   !string.IsNullOrWhiteSpace(txtModel.Text) &&
-                   !string.IsNullOrWhiteSpace(txtYear.Text) &&
-                   !string.IsNullOrWhiteSpace(txtColour.Text) &&
-                   !string.IsNullOrWhiteSpace(txtPrice.Text) &&
-                   !string.IsNullOrWhiteSpace(txtMileage.Text) &&
-                   !string.IsNullOrWhiteSpace(txtEngineType.Text) &&
-                   !string.IsNullOrWhiteSpace(txtTransmission.Text) &&
-                   !string.IsNullOrWhiteSpace(txtDescription.Text);
-        }
-
-        private void ShowMessage(string message, string cssClass)
-        {
-            lblMessage.Text = message;
-            lblMessage.CssClass = "alert " + cssClass;
-            lblMessage.Visible = true;
         }
     }
 }

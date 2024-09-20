@@ -15,6 +15,15 @@ namespace CarShowRoom
             {
                 pnlCustomers.Visible = false;
                 pnlCustomerForm.Visible = true;
+
+                if (!string.IsNullOrEmpty(Request.QueryString["CustomerId"]))
+                {
+                    int customerId;
+                    if (int.TryParse(Request.QueryString["CustomerId"], out customerId))
+                    {
+                        LoadCustomerData(customerId);
+                    }
+                }
             }
         }
 
@@ -128,7 +137,7 @@ namespace CarShowRoom
             else if (e.CommandName == "UpdateCustomer")
             {
                 int customerId = Convert.ToInt32(e.CommandArgument);
-                LoadCustomerData(customerId);
+                Response.Redirect($"Customer.aspx?CustomerId={customerId}");
             }
         }
 

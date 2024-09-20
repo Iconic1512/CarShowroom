@@ -3,19 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_ICONI_DESKTOP_CARSHOWROOM_CARSHOWROOM_APP_DATA_CARSHOWROOM.MDF/True/SqlTable/dbo.Customer.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|c:\\users\\iconi\\desktop\\carshowroom\\carshowroom\\sales.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|solutionrelative:carshowroom\\sales.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|C:\\Users\\iconi\\Desktop\\CarShowRoom\\carshowroom\\sales.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|solutionrelative:carshowroom\\sales.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|c:\\users\\iconi\\desktop\\carshowroom\\carshowroom\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|solutionrelative:carshowroom\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|C:\\Users\\iconi\\Desktop\\CarShowRoom\\carshowroom\\sales.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5CF5EA79-9D82-4B96-AAF8-7005D45AB4BB}|CarShowRoom\\CarShowRoom.csproj|solutionrelative:carshowroom\\sales.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,39 +22,15 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Sales.aspx.cs",
               "DocumentMoniker": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\CarShowRoom\\Sales.aspx.cs",
               "RelativeDocumentMoniker": "CarShowRoom\\Sales.aspx.cs",
               "ToolTip": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\CarShowRoom\\Sales.aspx.cs",
               "RelativeToolTip": "CarShowRoom\\Sales.aspx.cs",
-              "ViewState": "AQIAAGUAAAAAAAAAAAAwwIgAAAAAAAAA",
+              "ViewState": "AQIAANEAAAAAAAAAAAAUwNkAAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-13T11:39:13.095Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "dbo.Customer [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__USERS_ICONI_DESKTOP_CARSHOWROOM_CARSHOWROOM_APP_DATA_CARSHOWROOM.MDF/True/SqlTable/dbo.Customer.sql",
-              "ToolTip": "dbo.Customer [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-09-19T14:33:00.542Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Login.aspx",
-              "DocumentMoniker": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\CarShowRoom\\Login.aspx",
-              "RelativeDocumentMoniker": "CarShowRoom\\Login.aspx",
-              "ToolTip": "C:\\Users\\iconi\\Desktop\\CarShowRoom\\CarShowRoom\\Login.aspx",
-              "RelativeToolTip": "CarShowRoom\\Login.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-09-15T15:04:04.837Z",
+              "WhenOpened": "2024-09-20T04:32:24.921Z",
               "EditorCaption": ""
             },
             {
