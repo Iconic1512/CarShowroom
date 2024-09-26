@@ -141,7 +141,7 @@ namespace CarShowRoom
                 GridViewRow selectedRow = gvCars.Rows[index];
                 ViewState["CarId"] = gvCars.DataKeys[index].Value;
 
-                ddlManufacturer.SelectedValue = gvCars.DataKeys[index].Values["ManufacturerId"].ToString();
+                //ddlManufacturer.SelectedValue = gvCars.DataKeys[index].Values["ManufacturerId"].ToString();
                 txtModel.Text = selectedRow.Cells[2].Text;
                 txtYear.Text = selectedRow.Cells[3].Text;
                 txtName.Text = selectedRow.Cells[4].Text;

@@ -81,23 +81,6 @@ namespace CarShowRoom
             }
         }
 
-        protected void gvManufacturers_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            int manufacturerId = Convert.ToInt32(gvManufacturers.DataKeys[e.RowIndex].Value);
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand("DELETE FROM MANUFACTURER WHERE ManufacturerId=@ManufacturerId", con);
-                cmd.Parameters.AddWithValue("@ManufacturerId", manufacturerId);
-
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
-            }
-
-            ShowAlert("Manufacturer successfully deleted.", "success");
-            BindGrid();
-        }
-
         private void BindGrid()
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -141,3 +124,5 @@ namespace CarShowRoom
         }
     }
 }
+
+

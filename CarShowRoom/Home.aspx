@@ -94,7 +94,7 @@
                 <a href="Employee.aspx">Manage Employees</a>
                 <a href="Inventory.aspx">Manage Inventory</a>
                 <a href="Manufacturer.aspx">Manage Manufacturers</a>
-                <a href="Service_Record.aspx">Manage Service Records</a>
+                <a href="Service.aspx">Manage Service Records</a>
             </div>
             <div class="car-gallery">
                 <div class="car-item">

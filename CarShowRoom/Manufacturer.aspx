@@ -83,7 +83,6 @@
                         <asp:TemplateField>
                             <ItemTemplate>
                                 <asp:Button ID="btnEdit" runat="server" Text="Edit" CommandName="Select" CommandArgument='<%# Container.DataItemIndex %>' CssClass="btn btn-secondary btn-sm mx-1" />
-                                <asp:Button ID="btnDelete" runat="server" Text="Delete" CommandName="Delete" CommandArgument='<%# Eval("ManufacturerId") %>' CssClass="btn btn-danger btn-sm mx-1" />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
