@@ -38,11 +38,57 @@
             display: flex;
             gap: 10px; /* Adjust space between buttons */
         }
+
+        /* Drawer Styles */
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: -250px; /* Hide by default */
+            width: 250px;
+            height: 100%;
+            background-color: #d3d3d3; /* Light grey color */
+            transition: left 0.3s;
+            padding-top: 60px;
+            z-index: 999;
+        }
+        .drawer a {
+            padding: 15px;
+            text-decoration: none;
+            color: black; /* Text color */
+            display: block;
+            transition: background-color 0.3s;
+        }
+        .drawer a:hover {
+            background-color: #b0b0b0; /* Slightly darker on hover */
+        }
+        .drawer.open {
+            left: 0; /* Show when open */
+        }
     </style>
 </head>
 <body>
     <form id="inventoryform" runat="server" class="container form-container">
         <asp:ScriptManager ID="ScriptManager1" runat="server" />
+        
+        <div class="menu-icon" onclick="toggleDrawer()">&#9776;</div> <!-- Hamburger icon -->
+        <div class="drawer" id="drawer">
+            <a href="Car.aspx">Manage Cars</a>
+            <a href="Customer.aspx">Manage Customers</a>
+            <a href="Sales.aspx">Manage Sales</a>
+            <a href="Employee.aspx">Manage Employees</a>
+            <a href="Inventory.aspx">Manage Inventory</a>
+            <a href="Manufacturer.aspx">Manage Manufacturers</a>
+            <a href="Service.aspx">Manage Service Records</a>
+        </div>
+
         <div class="card">
             <div class="card-header">
                 <h2 class="text-center">Car Inventory Management</h2>
@@ -67,7 +113,7 @@
                         <asp:TemplateField>
                             <ItemTemplate>
                                 <div class="btn-group btn-group-sm">
-                                    <asp:Button ID="btnUpdate" runat="server" Text="Update" CommandName="UpdateRow" CommandArgument='<%# Eval("InventoryId") %>' CssClass="btn btn-warning btn-sm" />
+                                    <asp:Button ID="btnUpdate" runat="server" Text="Update" CommandName="UpdateRow" CommandArgument='<%# Eval("InventoryId") %>' CssClass="btn btn-warning btn-sm" OnClientClick="showUpdateForm();" />
                                 </div>
                             </ItemTemplate>
                         </asp:TemplateField>
@@ -97,22 +143,25 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script>
+            function toggleDrawer() {
+                const drawer = document.getElementById('drawer');
+                drawer.classList.toggle('open');
+            }
+
             function showUpdateForm() {
                 document.getElementById('updateForm').style.display = 'block';
             }
-        </script>
-            <script>
-                function hideMessage() {
-                    setTimeout(function () {
-                        var lblMessage = document.getElementById('<%= lblMessage.ClientID %>');
-                if (lblMessage) {
-                    lblMessage.classList.add('d-none');  // Ensure the label is hidden
-                    lblMessage.innerHTML = "";  // Clear the message text
-                }
-            }, 3000); // 3 seconds delay
-                }
 
-            </script>
+            function hideMessage() {
+                setTimeout(function () {
+                    var lblMessage = document.getElementById('<%= lblMessage.ClientID %>');
+                    if (lblMessage) {
+                        lblMessage.classList.add('d-none');  // Ensure the label is hidden
+                        lblMessage.innerHTML = "";  // Clear the message text
+                    }
+                }, 3000); // 3 seconds delay
+            }
+        </script>
     </form>
 </body>
 </html>

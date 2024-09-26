@@ -14,10 +14,54 @@
         .modal-content { padding: 20px; }
         .modal-header { background-color: #007bff; color: #fff; }
         .modal-footer { display: flex; justify-content: center; }
+        /* Drawer styles */
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: -250px; /* Hide by default */
+            width: 250px;
+            height: 100%;
+            background-color: #d3d3d3; /* Light grey color */
+            transition: left 0.3s;
+            padding-top: 60px;
+            z-index: 999;
+        }
+        .drawer a {
+            padding: 15px;
+            text-decoration: none;
+            color: black; /* Text color */
+            display: block;
+            transition: background-color 0.3s;
+        }
+        .drawer a:hover {
+            background-color: #b0b0b0; /* Slightly darker on hover */
+        }
+        .drawer.open {
+            left: 0; /* Show when open */
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
+        <div class="menu-icon" onclick="toggleDrawer()">&#9776;</div> <!-- Hamburger icon -->
+        <div class="drawer" id="drawer">
+            <a href="Car.aspx">Manage Cars</a>
+            <a href="Customer.aspx">Manage Customers</a>
+            <a href="Sales.aspx">Manage Sales</a>
+            <a href="Employee.aspx">Manage Employees</a>
+            <a href="Inventory.aspx">Manage Inventory</a>
+            <a href="Manufacturer.aspx">Manage Manufacturers</a>
+            <a href="Service.aspx">Manage Service Records</a>
+        </div>
+
         <div class="container">
             <header>
                 <h1>Sales Management</h1>
@@ -98,6 +142,12 @@
             var lblModalMessage = document.getElementById('<%= lblModalMessage.ClientID %>');
             lblModalMessage.innerHTML = message;
             $('#messageModal').modal('show');
+        }
+
+        // Function to toggle the drawer visibility
+        function toggleDrawer() {
+            const drawer = document.getElementById('drawer');
+            drawer.classList.toggle('open');
         }
     </script>
 </body>

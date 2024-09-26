@@ -5,6 +5,69 @@
     <title>Car Management</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <style>
+        /* Home.aspx Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            color: #333;
+            font-size: 2.5em;
+        }
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: -250px; /* Hide by default */
+            width: 250px;
+            height: 100%;
+            background-color: #d3d3d3; /* Light grey color */
+            transition: left 0.3s;
+            padding-top: 60px;
+            z-index: 999;
+        }
+        .drawer a {
+            padding: 15px;
+            text-decoration: none;
+            color: black; /* Text color */
+            display: block;
+            transition: background-color 0.3s;
+        }
+        .drawer a:hover {
+            background-color: #b0b0b0; /* Slightly darker on hover */
+        }
+        .drawer.open {
+            left: 0; /* Show when open */
+        }
+        .separator {
+            height: 2px; /* Height of the horizontal line */
+            background-color: #333; /* Color of the line */
+            margin: 20px 0; /* Space above and below the line */
+        }
+
+        /* Car.aspx Styles */
         .form-group label {
             font-weight: bold;
         }
@@ -35,6 +98,20 @@
 </head>
 <body>
     <form id="form1" runat="server" class="container form-container">
+        <!-- Navigation Bar -->
+        <div class="menu-icon" onclick="toggleDrawer()">&#9776;</div> <!-- Hamburger icon -->
+        <div class="drawer" id="drawer">
+            <a href="Car.aspx">Manage Cars</a>
+            <a href="Customer.aspx">Manage Customers</a>
+            <a href="Sales.aspx">Manage Sales</a>
+            <a href="Employee.aspx">Manage Employees</a>
+            <a href="Inventory.aspx">Manage Inventory</a>
+            <a href="Manufacturer.aspx">Manage Manufacturers</a>
+            <a href="Service.aspx">Manage Service Records</a>
+        </div>
+        <div class="separator"></div> <!-- Horizontal line -->
+
+        <!-- Car Management Form -->
         <div class="card">
             <div class="card-header">
                 <h2 class="text-center">Car Management</h2>
@@ -55,9 +132,9 @@
                         <label for="txtYear">Year:</label>
                         <asp:TextBox ID="txtYear" runat="server" Placeholder="Year" CssClass="form-control"></asp:TextBox>
                     </div>
-                     <div class="col-md-6 form-group">
-                         <label for="txtName">Name:</label>
-                         <asp:TextBox ID="txtName" runat="server" Placeholder="Name" CssClass="form-control"></asp:TextBox>
+                    <div class="col-md-6 form-group">
+                        <label for="txtName">Name:</label>
+                        <asp:TextBox ID="txtName" runat="server" Placeholder="Name" CssClass="form-control"></asp:TextBox>
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="txtColour">Colour:</label>
@@ -103,19 +180,24 @@
                         <asp:BoundField DataField="Description" HeaderText="Description" />
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <div class="btn-group btn-group-sm">
-                                    <asp:Button ID="btnEdit" runat="server" Text="Edit" CommandName="Select" CommandArgument='<%# Container.DataItemIndex %>' CssClass="btn btn-secondary btn-sm" />
-                                    <asp:Button ID="btnDelete" runat="server" Text="Delete" CommandName="Delete" CommandArgument='<%# Eval("CarId") %>' CssClass="btn btn-danger btn-sm" />
-                                </div>
+                                <asp:Button ID="btnEdit" runat="server" CommandName="EditCar" CommandArgument='<%# Eval("CarId") %>' Text="Edit" CssClass="btn btn-sm btn-warning mx-1" />
+                                <asp:Button ID="btnDelete" runat="server" CommandName="DeleteCar" CommandArgument='<%# Eval("CarId") %>' Text="Delete" CssClass="btn btn-sm btn-danger mx-1" OnClientClick="return confirm('Are you sure you want to delete this car?');" />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </form>
+    <script>
+        function toggleDrawer() {
+            var drawer = document.getElementById('drawer');
+            if (drawer.classList.contains('open')) {
+                drawer.classList.remove('open');
+            } else {
+                drawer.classList.add('open');
+            }
+        }
+    </script>
 </body>
 </html>
