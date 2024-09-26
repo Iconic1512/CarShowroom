@@ -9,54 +9,14 @@
         .container { max-width: 900px; margin-top: 30px; }
         .form-group label { font-weight: bold; }
         .error { color: red; text-align: center; margin-top: 10px; }
-        .btn-group { margin-bottom: 20px; }
-        .btn { margin-right: 10px; }
-        .panel { margin-top: 20px; }
-        .panel h3 { margin-bottom: 20px; }
-        .form-actions { margin-top: 20px; }
-        .form-actions .btn { margin-right: 10px; }
-        .form-control { border-radius: 0.25rem; }
-        .btn-primary { background-color: #007bff; border-color: #007bff; }
-        .btn-secondary { background-color: #6c757d; border-color: #6c757d; }
-        .btn-danger { background-color: #dc3545; border-color: #dc3545; }
-        .btn-info { background-color: #17a2b8; border-color: #17a2b8; }
-        .form-container { background-color: #f8f9fa; padding: 20px; border-radius: 0.25rem; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); }
-        .form-container h2 { margin-bottom: 20px; }
-        .form-actions { text-align: center; }
         .btn-container { display: flex; gap: 10px; justify-content: center; }
+        .form-container { background-color: #f8f9fa; padding: 20px; border-radius: 0.25rem; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); }
         /* Drawer Styles */
-        .menu-icon {
-            font-size: 30px;
-            cursor: pointer;
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-        }
-        .drawer {
-            position: fixed;
-            top: 0;
-            left: -250px; /* Hide by default */
-            width: 250px;
-            height: 100%;
-            background-color: #d3d3d3; /* Light grey color */
-            transition: left 0.3s;
-            padding-top: 60px;
-            z-index: 999;
-        }
-        .drawer a {
-            padding: 15px;
-            text-decoration: none;
-            color: black; /* Text color */
-            display: block;
-            transition: background-color 0.3s;
-        }
-        .drawer a:hover {
-            background-color: #b0b0b0; /* Slightly darker on hover */
-        }
-        .drawer.open {
-            left: 0; /* Show when open */
-        }
+        .menu-icon { font-size: 30px; cursor: pointer; position: absolute; top: 20px; left: 20px; z-index: 1000; }
+        .drawer { position: fixed; top: 0; left: -250px; width: 250px; height: 100%; background-color: #d3d3d3; transition: left 0.3s; padding-top: 60px; z-index: 999; }
+        .drawer a { padding: 15px; text-decoration: none; color: black; display: block; transition: background-color 0.3s; }
+        .drawer a:hover { background-color: #b0b0b0; }
+        .drawer.open { left: 0; }
     </style>
 </head>
 <body>
@@ -66,7 +26,7 @@
                 <h1>Customer Management</h1>
             </header>
 
-            <div class="menu-icon" onclick="toggleDrawer()">&#9776;</div> <!-- Hamburger icon -->
+            <div class="menu-icon" onclick="toggleDrawer()">&#9776;</div>
             <div class="drawer" id="drawer">
                 <a href="Car.aspx">Manage Cars</a>
                 <a href="Customer.aspx">Manage Customers</a>
@@ -80,10 +40,7 @@
             <!-- Panel for Customer Form -->
             <asp:Panel ID="pnlCustomerForm" runat="server" Visible="True" CssClass="form-container">
                 <h2 class="text-center">Customer Details</h2>
-                <div class="form-group">
-                    <label for="txtCustomerId">Customer ID</label>
-                    <asp:TextBox ID="txtCustomerId" runat="server" CssClass="form-control"></asp:TextBox>
-                </div>
+                <asp:HiddenField ID="hfCustomerId" runat="server" />
                 <div class="form-group">
                     <label for="txtName">Name</label>
                     <asp:TextBox ID="txtName" runat="server" CssClass="form-control"></asp:TextBox>
@@ -112,15 +69,12 @@
                     <label for="txtGender">Gender</label>
                     <asp:TextBox ID="txtGender" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
-                <div class="form-group">
-                    <label for="txtPassword">Password</label>
-                    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
-                </div>
                 <asp:Label ID="lblMessage" runat="server" CssClass="error"></asp:Label>
 
                 <div class="form-actions">
                     <asp:Button ID="btnAddCustomer" runat="server" Text="Add Customer" OnClick="btnAddCustomer_Click" CssClass="btn btn-primary" />
-                    <asp:Button ID="btnViewCustomers" runat="server" Text="View Customers" OnClick="btnViewCustomers_Click" CssClass="btn btn-info" />
+                    <asp:Button ID="btnUpdateCustomer" runat="server" Text="Update Customer" OnClick="btnUpdateCustomer_Click" CssClass="btn btn-secondary" Visible="false" />
+                    <asp:Button ID="btnViewCustomers" runat="server" Text="View Customers" OnClick="btnViewCustomers_Click" CssClass="btn btn-info" CausesValidation="false" />
                 </div>
             </asp:Panel>
 
@@ -163,7 +117,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <asp:Label ID="lblModalMessage" runat="server"></asp:Label>
+                            <asp:Label ID="lblModalMessage" runat="server" CssClass="error"></asp:Label>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -172,16 +126,15 @@
                 </div>
             </div>
         </div>
-    </form>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        function toggleDrawer() {
-            var drawer = document.getElementById('drawer');
-            drawer.classList.toggle('open');
-        }
-    </script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            function toggleDrawer() {
+                var drawer = document.getElementById("drawer");
+                drawer.classList.toggle("open");
+            }
+        </script>
+    </form>
 </body>
 </html>

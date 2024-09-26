@@ -33,13 +33,13 @@ namespace CarShowRoom
         protected global::System.Web.UI.WebControls.Panel pnlCustomerForm;
 
         /// <summary>
-        /// txtCustomerId control.
+        /// hfCustomerId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCustomerId;
+        protected global::System.Web.UI.WebControls.HiddenField hfCustomerId;
 
         /// <summary>
         /// txtName control.
@@ -105,15 +105,6 @@ namespace CarShowRoom
         protected global::System.Web.UI.WebControls.TextBox txtGender;
 
         /// <summary>
-        /// txtPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
-
-        /// <summary>
         /// lblMessage control.
         /// </summary>
         /// <remarks>
@@ -130,6 +121,15 @@ namespace CarShowRoom
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddCustomer;
+
+        /// <summary>
+        /// btnUpdateCustomer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdateCustomer;
 
         /// <summary>
         /// btnViewCustomers control.
